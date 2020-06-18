@@ -93,17 +93,47 @@ $quotes = array(
     ),
 );
 
-// Create the getRandomQuote function and name it getRandomQuote
+/* 
+Function printQuote passes the $quotes array into a nested function getRandomQuotes carrying the array $quotes
+getRandomQuote then uses that same $quotes array, passed to it, to come up with a random number and a single data 
+set from the array. getRandomQuote then returns that as a single $quote array.
+printQuote then takes the returned $quote, loads it into $tempQuote and pulls out the individual items - the quote, 
+the author of the quote, the year of the quote and the citation source of the quote.
+An HTML string is the constructed using these 4 elements - but first validates that the citation and year exist. 
+Finally, that string is passed through a call that is made at the end of the function to a value called $string which
+will get used directly in the index.php, substiting for the fixed text. 
 
 
-$random_number = random_int(0,9);
-$quote_keys = array_keys($quotes)[$random_number];
-$quote = $quotes[$quote_keys];
-$specific_quote = $quote["quote"];
-$quoted= $quote["quoted"];
-$quote_year = $quote["quoteYear"];
-$quote_citation = $quote["quoteCitation"];
+*/
+function printQuote($quotes){
 
+function getRandomQuote($quotes){
+
+    $random_number = random_int(0,count($quotes)-1);
+    $quote_keys = array_keys($quotes)[$random_number];
+    $quote = $quotes[$quote_keys];
+return $quote;
+  }
+  
+$tempQuote = getRandomQuote($quotes);
+$specific_quote = $tempQuote["quote"];
+$quoted= $tempQuote["quoted"];
+$quote_year = $tempQuote["quoteYear"];
+$quote_citation = $tempQuote["quoteCitation"];
+$quote_string = "<p class=\"quote\">" . $specific_quote . "</p><p class=\"source\">" . $quoted;
+    if (isset($quote_citation)) {
+        $quote_string = $quote_string . "<span class=\"citation\">" . $quote_citation . "</span>";
+    }
+
+    if (isset($quote_year)) { 
+        $quote_string = $quote_string .  "<span class=\year\"></br>" . $quote_year . "</span>";
+    }
+    $quote_string = $quote_string . "</p>";
+  
+return $quote_string;
+
+}
+$string = printQuote($quotes);
 
 
 // Create the printQuote function and name it printQuote

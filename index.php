@@ -12,20 +12,8 @@
  include 'inc/functions.php'; 
  echo "<div class=\"container\">";
     echo "<div id=\"quote-box\">";
-      
-      echo "<p class=\"quote\">" . $specific_quote . "</p>"; 
-      echo "<p class=\"source\">" . $quoted;
-
-      if (isset($quote_citation)) {
-          echo "<span class=\"citation\">" . $quote_citation . "</span>";
-      }
-
-      if (isset($quote_year)) { 
-          echo "<span class=\year\"></br>" . $quote_year . "</span>";
-      }
-      
-      echo "</p>";
-
+    // below is the concatenated string that provides the HTML to produce the quote
+    echo $string;
     echo "</div>";
     echo "<button id=\"loadQuote\" onclick=\"window.location.reload(true)\" >Show another quote</button>";
     
